@@ -1,12 +1,14 @@
-# circle.yml
+version: '2'
 machine:
+  pre:
+    - sudo curl -L -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m`
+    - sudo chmod +x /usr/local/bin/docker-compose
   services:
     - docker
 
-dependencies:
-  pre:
-    - docker-compose build
-
 test:
+  pre:
+    - setup_remote_docker
+    - docker-compose build
   post:
-    - docker-compose -d -p 3000:3000
+    - docker-compose exec api python manage.py test
