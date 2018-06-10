@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    command: python /usr/src/app/manage.py migrate
+    command: python /usr/src/app/manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000

@@ -1,0 +1,12 @@
+# circle.yml
+machine:
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - docker-compose build
+
+test:
+  post:
+    - docker-compose -d -p 3000:3000
