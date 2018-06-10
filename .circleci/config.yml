@@ -8,6 +8,7 @@ machine:
 
 test:
   pre:
+    - setup_remote_docker
     - docker-compose build
   post:
     - docker-compose exec api python manage.py test
