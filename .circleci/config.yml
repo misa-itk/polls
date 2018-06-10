@@ -1,4 +1,4 @@
-# circle.yml
+version: '2'
 machine:
   pre:
     - sudo curl -L -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m`
