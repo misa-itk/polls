@@ -6,10 +6,8 @@ machine:
   services:
     - docker
 
-dependencies:
+test:
   pre:
     - docker-compose build
-
-test:
   post:
     - docker-compose exec api python manage.py test
