@@ -12,3 +12,11 @@ jobs:
           name: Start container and verify it's working
           command: |
             ls
+      - run:
+          name: Start container and verify it's working
+          command: |
+            pwd
+      - run:
+          name: Start container and verify it's working
+          command: |
+            echo 'bla'
