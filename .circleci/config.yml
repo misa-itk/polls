@@ -3,7 +3,6 @@ jobs:
  build:
    machine: true
    steps:
-     # checkout source code
      - checkout
-     - run: |
-         docker-compose run api python manage.py test
+     - run: docker-compose build
+     - run: docker-compose run api python manage.py test
