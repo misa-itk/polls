@@ -8,5 +8,6 @@ jobs:
       - checkout
       - run:
           command: |
+            sudo apt-get install python3-pip
             pip install docker-compose
             docker-compose build
