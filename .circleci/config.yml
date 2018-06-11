@@ -2,6 +2,8 @@ version: 2
 jobs:
   build:
     working_directory: ~/polls
+    docker:
+      - image: haskell:8.2.1
     steps:
       - checkout
       - run:
