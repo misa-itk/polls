@@ -11,11 +11,15 @@ jobs:
       - run:
           name: Start container and verify it's working
           command: |
-            ls
+            ll
       - run:
           name: Start container and verify it's working
           command: |
             pwd
+      - run:
+          name: Start container and verify it's working
+          command: |
+            ls -la
       - run:
           name: Start container and verify it's working
           command: |
