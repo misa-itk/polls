@@ -3,5 +3,6 @@ jobs:
  build:
    machine: true
    steps:
-     - run: docker-compose -f docker-compose.test.yml build
+     - checkout
+     - run: docker-compose -f build
      - run: docker-compose -f docker-compose.test.yml run --rm api
