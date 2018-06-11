@@ -3,6 +3,7 @@ jobs:
    build:
      docker:
        - image: circleci/python:2-stretch-node-browsers
+       - image: circleci/ruby:rc-node-browsers
      steps:
        - checkout
        - run: echo "hello world"
