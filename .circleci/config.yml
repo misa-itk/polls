@@ -17,5 +17,6 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: |
-            pipenv run "python setup.py install"
+            pipenv run "pip install docker-compose"
+            pipenv run "docker-compose build"
             pipenv run "python manage.py test"
