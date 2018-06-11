@@ -1,26 +1,40 @@
+version: 2
 jobs:
   build:
-    machine: true
+    working_directory: ~/ci
+    docker:
+      - image: buildpack-deps:trusty
     steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+
       - run:
           name: Install Docker Compose
           command: |
-            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: Start container and verify it's working
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+
+      - run: 
+          name: Build
+          working_directory: ~/ci/server
           command: |
-            ll
-      - run:
-          name: Start container and verify it's working
+            set -x
+            docker-compose -f docker-compose.yml build --no-cache
+
+      - run: 
+          name: Run Tests
+          working_directory: ~/ci/server
           command: |
-            pwd
-      - run:
-          name: Start container and verify it's working
-          command: |
-            ls -la
-      - run:
-          name: Start container and verify it's working
-          command: |
-            echo 'bla'
+            set -x
+            docker-compose -f docker-compose.yml run api python manage.py test
