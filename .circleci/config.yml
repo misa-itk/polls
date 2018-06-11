@@ -1,10 +1,15 @@
-version: 2
 jobs:
-   build:
-     docker:
-       - image: circleci/python:2-stretch-node-browsers
-       - image: circleci/ruby:rc-node-browsers
-     steps:
-       - checkout
-       - run: echo "hello world"
-       - run: echo "hello world"
+  build:
+    steps:
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - setup_remote_docker
+      - run:
+          name: Start container and verify it's working
+          command: |
+            set -x
+            docker-compose build
