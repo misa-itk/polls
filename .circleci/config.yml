@@ -4,5 +4,9 @@ jobs:
    machine: true
    steps:
      - checkout
-     - run: docker-compose build
-     - run: docker-compose -f docker-compose.test.yml run --rm api
+     - run:
+          name: Build images
+          command: docker-compose build
+     - run:
+          name: Run tests
+          command: docker-compose -f docker-compose.test.yml run --rm api
