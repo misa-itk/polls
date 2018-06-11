@@ -17,4 +17,5 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
           command: |
+            pipenv run "pip install -r requirements.txt"
             pipenv run "python manage.py test"
