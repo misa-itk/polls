@@ -3,4 +3,4 @@ version: '3'
 services:
   api:
     build: .
-    command: python /usr/src/app/manage.py runserver test
+    command: python /usr/src/app/manage.py test
