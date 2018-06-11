@@ -1,12 +1,12 @@
-# circle.yml
-machine:
-  services:
-    - docker
-
-dependencies:
-  pre:
-    - docker-compose build
-
-test:
-  post:
-    - docker-compose -d -p 3000:3000
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     - run:
+          name: Build images
+          command: docker-compose build
+     - run:
+          name: Run tests
+          command: docker-compose -f docker-compose.test.yml run --rm api
