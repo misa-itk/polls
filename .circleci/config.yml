@@ -11,5 +11,4 @@ jobs:
       - run:
           name: Start container and verify it's working
           command: |
-            set -x
-            docker-compose build
+            docker-compose -f docker-compose.yml build --no-cache
