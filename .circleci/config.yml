@@ -1,18 +1,9 @@
 version: 2
 jobs:
-  build:
-    working_directory: ~/polls
-    docker:
-      - image: haskell:8.2.1
-    steps:
-      - checkout
-      - run:
-          name: Install Docker Compose
-          command: |
-            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          command: |
-            setup_remote_docker
-      - run: docker-compose build
+ build:
+   machine: true
+   steps:
+     # checkout source code
+     - checkout
+     - run: |
+         docker-compose run api python manage.py test
